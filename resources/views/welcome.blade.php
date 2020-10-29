@@ -2,6 +2,7 @@
 
 @section('title')
 <title>Welcome Page</title>
+
 @endsection
 
 @section('content')
@@ -39,11 +40,30 @@
                 <td>{{$student->last_name}}</td>
                 <td>{{$student->email}}</td>
                 <td>{{$student->mobile_number}}</td>
-                <td>Action</td>
+                <td><a href={{route('edit',$student->id)}}><i class="fa fa-edit btn-warning btn-sm"></i></a> ||
+                    <form action={{route('delete',$student->id)}} method="POST" id="delete-form-{{$student->id}}" style="display:none">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                    </form>
+                    <button onclick="if(confirm('Are you sure Delete?')){ event.preventDefault(); document.getElementById('delete-form-{{$student->id}}').submit(); } else{ event.preventDefault(); }" class="btn-sm btn-danger">
+                        <a href={{route('delete',$student->id)}}>
+                            <i class="fa  fa-trash "></i>
+                        </a>
+                    </button> </td>
             </tr>
             @endforeach
         </tbody>
+
     </table>
+
+    <div class="d-flex justify-content-center">
+        {!! $students->links() !!}
+    </div>
+    <br/><br/>
 </div>
+
+
+
+
 
 @endsection
