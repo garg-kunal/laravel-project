@@ -17,4 +17,8 @@ use App\Http\Controllers\StudentController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/',[StudentController::class, 'index']);
+Route::get('/',[StudentController::class, 'index'])->name('home');
+
+
+Route::get('/create',[StudentController::class, 'create'])->name('create');
+Route::post('/create',[StudentController::class, 'store'])->name('store');
